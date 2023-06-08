@@ -1,0 +1,24 @@
+//Write an Embedded C program to add array of n numbers.
+
+#include <xc.h>  
+#include <stdlib.h> 
+#include <pic18f4550.h>  
+
+void main(void)
+{
+    int i, sum;  // Declare two integer variables
+    int a[] = {0x01, 0x02, 0x03, 0x01};  // Declare and initialize an array with four hexadecimal values
+    
+    sum = 0x00;  // Assign hexadecimal value 0x00 (0 in decimal) to variable 'sum'
+    
+    for (i = 0; i < 4; i++)  // Loop through the elements of the array
+    {
+        sum = sum + a[i];  // Perform addition of each element with 'sum' and update its value
+    }
+    
+    TRISD = 0;  
+    
+    PORTD = sum;  
+    
+    return;  
+}

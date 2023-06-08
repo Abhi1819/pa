@@ -1,0 +1,80 @@
+//Write an Embedded C program to transfer elements from one location to another for following:
+//i. Memory transfer
+//ii. Memory exchange
+
+//Program (Memory transfer):
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <PIC18F4550.h>
+
+void main(void)
+{
+    int i;
+    int source[5] = {0x0A, 0x0B, 0x0C, 0x0D, 0x0E};
+    int dest[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
+    
+    for (i = 0; i < 5; i++)
+    {
+        dest[i] = source[i];  // Copy each element from the source array to the dest array
+    }
+    
+    TRISD = 0;  // Configure PORTD as an output
+    
+    for (i = 0; i < 5; i++)
+    {
+        PORTD = dest[i];  // Output the value of each element in the dest array to PORTD
+        
+        for (int n = 0; n < 1000; n++)  // Delay loop for a period of time
+        {
+            for (int j = 0; j < 500; j++)
+            {
+                // Empty loop for delay
+            }
+        }
+    }
+    
+    return;
+}
+
+
+//Program (Memory exchange):
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <PIC18F4550.h>
+
+void main(void)
+{
+    int i;
+    int source[5] = {0x0A, 0x0B, 0x0C, 0x0D, 0x0E};
+    int dest[5] = {0x01, 0x02, 0x03, 0x04, 0x05};
+    int temp[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
+    
+    for (i = 0; i < 5; i++)
+    {
+        temp[i] = dest[i];  // Copy the value from dest to temp
+        dest[i] = source[i];  // Copy the value from source to dest
+        source[i] = temp[i];  // Copy the value from temp to source
+    }
+    
+    TRISB = 0;  // Configure PORTB as an output
+    TRISD = 0;  // Configure PORTD as an output
+    
+    for (i = 0; i < 5; i++)
+    {
+        PORTB = source[i];  // Output the value of each element in the source array to PORTB
+        PORTD = dest[i];  // Output the value of each element in the dest array to PORTD
+        
+        for (int n = 0; n < 1000; n++)  // Delay loop for a period of time
+        {
+            for (int j = 0; j < 500; j++)
+            {
+                // Empty loop for delay
+            }
+        }
+    }
+    
+    return;
+}

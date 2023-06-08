@@ -1,0 +1,39 @@
+//Write an Embedded C menu driven program for
+//i. Multiply 8 bit number by 8 bit number
+//ii. Divide 8 bit number by 8 bit number.
+//A – MULTIPLICTION
+//Program:
+
+#include <xc.h>
+#include<stdlib.h>
+#include<pic18f4550.h>
+void main(void)
+{
+int x,y,mul;
+x=0x04;
+y=0x05;
+mul=0x00;
+mul=x*y;
+TRISD=0;
+PORTD=mul;
+return;
+}
+
+
+//B – DIVISION
+//Program:
+
+#include <xc.h>
+#include<stdio.h>
+#include<PIC18F4550.h>
+void main(void)
+{
+int a,b,div;
+a = 0x0A;
+b = 0x05;
+div = 0x00;
+div = a / b;
+TRISD = 0;
+PORTD = div;
+return;
+}

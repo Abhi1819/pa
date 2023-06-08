@@ -1,0 +1,22 @@
+//Study of Embedded C programming language (Overview, syntax, one simple program like addition of two numbers).
+
+#include <xc.h>  
+#include <stdio.h>  
+#include <PIC18F4550.h>  
+
+void main(void)
+{
+    int a, b, sum;  
+    
+    a = 0x0B;  
+    b = 0x07;  
+    sum = 0x00;  
+    
+    sum = a + b;  
+    
+    TRISD = 0;  
+    
+    PORTD = sum;  
+    
+    return;  
+}

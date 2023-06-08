@@ -1,0 +1,49 @@
+//Write an Embedded C program for Timer as Counter.
+//Program:
+
+#include <xc.h>
+#include <pic18f4550.h>
+#include <stdlib.h>
+
+void main()
+{
+    TRISD = 0x00; // Set PORTD as output
+
+    T0CON = 0x48; // Configure Timer0: 8-bit mode, prescaler 1:16, timer OFF
+    TMR0L = 0x00; // Set Timer0 initial value
+
+    while (1)
+    {
+        T0CONbits.TMR0ON = 1; // Start Timer0
+
+        do
+        {
+            /*PORTD = TMR0L;*/
+            for (int i = 0; i < 500; i++)
+            {
+                for (int j = 0; j < 100; j++)
+                {
+                    // Delay loop
+                }
+            }
+        } while (INTCONbits.TMR0IF == 0);
+
+        PORTD = 0xFF; // Set PORTD to all ones (0xFF)
+
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                // Delay loop
+            }
+        }
+
+        T0CONbits.TMR0ON = 0; // Stop Timer0
+        INTCONbits.TMR0IF = 0; // Clear Timer0 interrupt flag
+
+        if (T0CONbits.TMR0ON == 0)
+        {
+            PORTD = 0x00; // Set PORTD to all zeros (0x00)
+        }
+    }
+}

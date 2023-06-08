@@ -1,0 +1,32 @@
+//Write an Embedded C program to interface PIC 18FXXX with LED &amp; blinking it using specified delay.
+
+
+#include <xc.h>
+#include <pic18f4550.h>
+#include <stdlib.h>
+
+void todelay(void)
+{
+    T0CON = 0x08;  // Configure Timer0
+    TMR0H = 0x35;  // Set Timer0 high byte value
+    TMR0L = 0x00;  // Set Timer0 low byte value
+    T0CONbits.TMR0ON = 1;  // Start Timer0
+    
+    while (INTCONbits.TMR0IF == 0);  // Wait until Timer0 overflows
+    T0CONbits.TMR0ON = 0;  // Stop Timer0
+    INTCONbits.TMR0IF = 0;  // Clear Timer0 interrupt flag
+}
+
+void main(void)
+{
+    TRISD = 0;  // Configure PORTD as an output
+    
+    while (1)
+    {
+        PORTD = 0x55;  // Output pattern 0x55 on PORTD
+        todelay();  // Call the delay function
+        
+        PORTD = 0xAA;  // Output pattern 0xAA on PORTD
+        todelay();  // Call the delay function
+    }
+}

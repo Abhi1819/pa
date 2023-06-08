@@ -1,0 +1,86 @@
+//Write an Embeded C program for sorting the numbers in ascending and descending order.
+
+//Program (Ascending Order):
+
+#include <xc.h>
+#include <stdlib.h>
+#include <pic18f4550.h>
+
+void main(void)
+{
+    int i, j, temp;
+    int array[] = {0x04, 0x01, 0x02, 0x05, 0x03};
+    
+    for (i = 0; i < 5; i++)
+    {
+        for (j = i + 1; j < 5; j++)
+        {
+            if (array[i] > array[j])
+            {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+    
+    TRISD = 0;  // Configure PORTD as an output
+    
+    for (i = 0; i <= 5; i++)
+    {
+        PORTD = array[i];  // Output the value of each element in the array to PORTD
+        
+        for (int n = 0; n < 200; n++)  // Delay loop for a period of time
+        {
+            for (int j = 0; j < 500; j++)
+            {
+                // Empty loop for delay
+            }
+        }
+    }
+    
+    return;
+}
+
+
+//Program (descending order):
+
+#include <xc.h>
+#include <stdlib.h>
+#include <pic18f4550.h>
+
+void main(void)
+{
+    int i, j, temp;
+    int array[] = {0x04, 0x01, 0x02, 0x05, 0x03};
+    
+    for (i = 0; i < 5; i++)
+    {
+        for (j = i + 1; j < 5; j++)
+        {
+            if (array[i] < array[j])
+            {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+    
+    TRISD = 0;  // Configure PORTD as an output
+    
+    for (i = 0; i <= 5; i++)
+    {
+        PORTD = array[i];  // Output the value of each element in the array to PORTD
+        
+        for (int n = 0; n < 200; n++)  // Delay loop for a period of time
+        {
+            for (int j = 0; j < 500; j++)
+            {
+                // Empty loop for delay
+            }
+        }
+    }
+    
+    return;
+}
